@@ -8,6 +8,10 @@ Installib helps your to write post-installation tests on Windows Systems.
 
 * Python 2.7+.
 * Some functionality requires run as administrator.
+* Behave (optional).
+```
+pip install behave
+```
 
 
 ## Install ##

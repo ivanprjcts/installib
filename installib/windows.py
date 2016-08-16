@@ -1,6 +1,9 @@
 from _winreg import *
 
 import win32api
+import subprocess
+import os
+import platform
 
 # Reading from SOFTWARE\Microsoft\Windows\CurrentVersion\Run
 aReg = ConnectRegistry(None, HKEY_LOCAL_MACHINE)
@@ -48,6 +51,14 @@ def get_registry_from_microsoft_windows_current_version_uninstall(key):
     return get_registry_from(r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%s" % key)
 
 
+def get_32bit_application_registry_from_microsoft_windows_current_version_uninstall(product_code):
+    os_architecture = platform.architecture()[0]
+    if os_architecture == "64bit":
+        return get_registry_from_wow6432_microsoft_windows_current_version_uninstall(product_code)
+    else:
+        return get_registry_from_microsoft_windows_current_version_uninstall(product_code)
+
+
 def get_file_properties(fname):
     """
     Read all properties of the given file return them as a dictionary.
@@ -85,3 +96,12 @@ def get_file_properties(fname):
         pass
 
     return props
+
+
+def uninstall_windows_application(product_code):
+    with open(os.devnull, "w") as devnull:
+        process = subprocess.Popen(
+            ["MSIEXEC.EXE", "/x", product_code, "/qn"],
+            stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+            stderr=devnull)
+        process.wait()
