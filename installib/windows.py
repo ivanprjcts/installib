@@ -98,6 +98,16 @@ def get_file_properties(fname):
     return props
 
 
+def install_installshield_package(path_to_installer):
+    with open(os.devnull, "w") as devnull:
+        process = subprocess.Popen(
+            '"%s" /s /v"/qn"' % path_to_installer,
+            shell=True,
+            stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+            stderr=devnull)
+        process.wait()
+
+
 def uninstall_windows_application(product_code):
     with open(os.devnull, "w") as devnull:
         process = subprocess.Popen(

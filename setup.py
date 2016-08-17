@@ -49,7 +49,7 @@ class MyInstall(install):
 
 setup(
     name='installib',
-    version='0.2.1',
+    version='0.3',
     description='Install helper library',
     author='Ivan Martin',
     author_email='ivanprjcts@gmail.com',
