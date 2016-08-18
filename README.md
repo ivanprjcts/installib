@@ -1,5 +1,6 @@
 # Installib: friendly installation testing  #
 
+[![pypi-version]][pypi]
 
 Installib helps your to write post-installation tests on Windows Systems.
 
@@ -29,3 +30,7 @@ Install the `installib` package using pip:
 ## Authors ##
 
 * @ivanpjcts (Iván Martín Vedriel) - also maintainer.
+
+
+[pypi-version]: https://img.shields.io/pypi/v/installib.svg
+[pypi]: https://pypi.python.org/pypi/installib
