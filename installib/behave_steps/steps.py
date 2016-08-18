@@ -73,9 +73,11 @@ def step_assert_help_telephone(context, telephone):
 
 @then('url info about is equal to "{url_info_about}"')
 def step_assert_url_info(context, url_info_about):
-    assert(context.registry.url_info_about == url_info_about)
+    assert context.registry.url_info_about == url_info_about, "%s is not equal to %s" % (context.registry.url_info_about,
+                                                                                         url_info_about)
 
 
 @then('publisher about is equal to "{publisher}"')
 def step_assert_publisher(context, publisher):
-    assert(context.registry.publisher == publisher)
+    assert context.registry.publisher == publisher, "%s is not equal to %s" % (context.registry.publisher,
+                                                                               publisher)
