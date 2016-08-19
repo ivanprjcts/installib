@@ -98,13 +98,18 @@ def get_file_properties(fname):
     return props
 
 
-def install_installshield_package(path_to_installer):
+def install_installshield_package(path_to_installer, install_path=None):
+    if install_path is None:
+        installdir = ""
+    else:
+        installdir = ' INSTALLDIR=\\"%s\\"' % install_path
     with open(os.devnull, "w") as devnull:
         process = subprocess.Popen(
-            '"%s" /s /v"/qn"' % path_to_installer,
+            '"%s" /s /v"/qn%s"' % (path_to_installer, installdir),
             shell=True,
             stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-            stderr=devnull)
+            stderr=devnull
+        )
         process.wait()
 
 

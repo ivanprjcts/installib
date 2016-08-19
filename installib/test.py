@@ -28,7 +28,7 @@ def assert_source_files_are_installed_and_obfuscated(install_path, source_files,
             [("es\resource.dll", ">=", "1.3.0.0", False), ("core.dll", "", "", False)]
     :param source_files_without_obfuscate_path: (optional) needed to compare obfuscated source files
     """
-    assert(os.path.isdir(install_path))
+    assert os.path.isdir(install_path), "%s does not exist" % install_path
     for source_file, op, version, check_obfuscation in source_files:
         file_path = os.path.join(install_path, source_file)
         assert os.path.isfile(file_path), "%s file not found in %s" % (source_file, install_path)
