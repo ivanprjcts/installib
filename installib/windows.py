@@ -113,10 +113,15 @@ def install_installshield_package(path_to_installer, install_path=None):
         process.wait()
 
 
-def uninstall_windows_application(product_code):
+def uninstall_windows_application(product_code, **kwargs):
+    cmd = "MSIEXEC.EXE /x %s /qn" % product_code
+    for k, v in kwargs.iteritems():
+        cmd += ' %s="%s"' % (k, v)
+    print(cmd)
     with open(os.devnull, "w") as devnull:
         process = subprocess.Popen(
-            ["MSIEXEC.EXE", "/x", product_code, "/qn"],
+            cmd,
+            shell=True,
             stdin=subprocess.PIPE, stdout=subprocess.PIPE,
             stderr=devnull)
         process.wait()
